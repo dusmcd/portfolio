@@ -1,4 +1,5 @@
 var Project = require("./models/project");
+var Testimonial = require("./models/testimonials");
 var mongoose = require("mongoose");
 
 var data = [
@@ -48,11 +49,22 @@ function seedDB() {
     }
     console.log("all data removed");
     data.forEach(function(project) {
+      //create projects from data array
       Project.create(project, function(err, newProject) {
         if(err) {
           console.log(err);
         } else {
           console.log("new project created");
+          //add testimonial to each project
+          Testimonial.create({name: "Bob", text: "blah blah blah"}, function(err, comment) {
+            if(err) {
+              console.log(err);
+            } else {
+              newProject.testimonials.push(comment);
+              newProject.save();
+              console.log("testimonial added");
+            }
+          })
         }
       });
     });

@@ -3,6 +3,7 @@ var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var Project = require("./models/project");
+var Testimonial = require("./models/testimonials");
 var methodOverride = require("method-override");
 var seedDB = require("./seeds");
 
@@ -24,13 +25,13 @@ app.get("/projects", function(req, res) {
     if(err) {
       console.log(err);
     } else {
-      res.render("index", {projects: projects});
+      res.render("projects/index", {projects: projects});
     }
   });
 });
 //new and create routes
 app.get("/projects/new", function(req, res) {
-  res.render("new");
+  res.render("projects/new");
 });
 app.post("/projects", function(req, res) {;
   Project.create(req.body.project, function(err, project) {
@@ -47,7 +48,7 @@ app.get("/projects/:id", function(req, res) {
       if(err) {
         console.log(err);
       } else {
-        res.render("show", {project: project})
+        res.render("projects/show", {project: project})
       }
     });
 });
@@ -57,7 +58,7 @@ app.get("/projects/:id/edit", function(req, res) {
       if(err) {
         console.log(err);
       } else {
-        res.render("edit", {project: project})
+        res.render("projects/edit", {project: project})
       }
     });
 });
@@ -71,6 +72,17 @@ app.put("/projects/:id", function(req, res) {
       res.redirect("/projects/" + req.params.id)
     }
   });
+});
+
+//testimonials routes
+app.get("/projects/:id/testimonials/new", function(req, res) {
+    Project.findById(req.params.id, function(err, foundProject) {
+      if(err) {
+        console.log(err);
+      } else {
+        res.render("testimonials/new", {project: foundProject});
+      }
+    });
 });
 
 

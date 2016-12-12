@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 <div class="ui container">
   <form class="ui form" action="/projects" method="post">
     <div class="field">
@@ -11,7 +11,7 @@
     </div>
     <div class="field">
       <label>Description</label>
-      <input type="text" name="project[description]">
+      <textarea name="project[description]"></textarea>
     </div>
     <button type="submit" class="ui button">Submit</button>
   </form>
@@ -21,4 +21,4 @@
 
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>
