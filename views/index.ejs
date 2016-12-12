@@ -1,0 +1,23 @@
+<% include partials/header %>
+  <div class="ui segment" id="jumbotron">
+    <h1 class="ui center aligned header">Welcome to the Home Page</h1>
+  </div>
+  <div class="ui container">
+    <div class="ui grid">
+      <% projects.forEach(function(project) { %>
+        <div class="eight wide column">
+            <img class="ui medium circular image" src="<%= project.image %>"/>
+        </div>
+        <div class="eight wide column">
+          <div class="ui segment">
+            <h3 class="ui header"><%= project.title %></h3>
+            <p><%= project.description.substring(0,100) %> ...</p>
+            <a class="ui primary basic button" href="/projects/<%= project._id %>">See More</a>
+          </div>
+        </div>
+
+    <% }); %>
+    </div>
+  </div>
+
+<% include partials/footer %>
